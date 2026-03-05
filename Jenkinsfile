@@ -1,17 +1,21 @@
 pipeline {
     agent any
 
+    environment {
+        GEMINI_API_KEY = credentials('GEMINI_API_KEY')
+    }
+
     stages {
+
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/Lohi2005/ai-chatbot-devops3.git'
+            }
+        }
 
         stage('Install Dependencies') {
             steps {
                 bat 'pip install -r requirements.txt'
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                bat 'python -m pytest'
             }
         }
 
@@ -21,9 +25,9 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Run Container') {
             steps {
-                bat 'docker run -d -p 5000:5000 ai-chatbot'
+                bat 'docker run -d -p 5000:5000 -e GEMINI_API_KEY=%GEMINI_API_KEY% ai-chatbot'
             }
         }
 
