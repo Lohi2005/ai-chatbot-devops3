@@ -1,7 +1,8 @@
+import os
 import google.genai as genai
 
-# Your Gemini API key
-client = genai.Client(api_key="YOUR_API_KEY")
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
 
 def get_chatbot_response(user_input: str) -> str:
     models = list(client.models.list())
@@ -17,3 +18,4 @@ def get_chatbot_response(user_input: str) -> str:
     )
 
     return response.text
+
