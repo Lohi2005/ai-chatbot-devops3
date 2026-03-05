@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/yourusername/ai-chatbot-devops.git'
+                git 'https://github.com/Lohi2005/ai-chatbot-devops3.git'
             }
         }
 
@@ -33,3 +33,4 @@ pipeline {
         }
     }
 }
+
