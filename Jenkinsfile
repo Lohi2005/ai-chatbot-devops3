@@ -9,7 +9,7 @@ pipeline {
 
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/Lohi2005/ai-chatbot-devops3.git'
+                git branch: 'main', url: 'https://github.com/Lohi2005/ai-chatbot-devops3.git'
             }
         }
 
