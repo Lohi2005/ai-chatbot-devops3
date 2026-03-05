@@ -1,14 +1,13 @@
-import os
 import google.genai as genai
 
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+client = genai.Client(api_key="YOUR_GEMINI_API_KEY")
 
+def get_chatbot_response(user_input):
 
-def get_chatbot_response(user_input: str) -> str:
     models = list(client.models.list())
 
     if not models:
-        return "No models available."
+        return "No models available"
 
     model_name = models[0].name
 
@@ -18,4 +17,3 @@ def get_chatbot_response(user_input: str) -> str:
     )
 
     return response.text
-
