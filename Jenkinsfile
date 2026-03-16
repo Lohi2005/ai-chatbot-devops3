@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven-3'
-    }
-
     environment {
         GEMINI_API_KEY = credentials('GEMINI_API_KEY')
     }
@@ -14,12 +10,6 @@ pipeline {
         stage('Clone Repo') {
             steps {
                 git branch: 'main', url: 'https://github.com/Lohi2005/ai-chatbot-devops3.git'
-            }
-        }
-
-        stage('Build with Maven') {
-            steps {
-                bat 'mvn -v'
             }
         }
 
