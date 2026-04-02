@@ -1,19 +1,18 @@
 import google.genai as genai
+import os
 
-client = genai.Client(api_key="YOUR_GEMINI_API_KEY")
+# Use API key from environment (IMPORTANT for Docker/Jenkins)
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
-def get_chatbot_response(user_input):
+# FIXED model (do NOT dynamically fetch)
+MODEL_NAME = "gemini-1.5-flash"
 
-    models = list(client.models.list())
-
-    if not models:
-        return "No models available"
-
-    model_name = models[0].name
-
-    response = client.models.generate_content(
-        model=model_name,
-        contents=user_input
-    )
-
-    return response.text
+def get_chatbot_response(user_input: str) -> str:
+    try:
+        response = client.models.generate_content(
+            model=MODEL_NAME,
+            contents=user_input
+        )
+        return response.text
+    except Exception as e:
+        return f"Error: {str(e)}"
